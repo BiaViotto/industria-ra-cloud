@@ -1,8 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -12,230 +12,146 @@
 
     <title>RA | Centro de Usinagem</title>
 
-    <!-- CSS do projeto -->
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
-    <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
 
-    <!-- MindAR -->
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"
+    ></script>
+
 </head>
 
 <body>
 
-    <!-- HUD superior -->
-    <header id="hud">
+    <div id="loading">
+        <div class="loading-spinner"></div>
+        <p>Carregando realidade aumentada...</p>
+    </div>
 
-        <div class="hud-title">
-            <strong>CENTRO DE USINAGEM</strong>
-            <span>MANUAL INTERATIVO</span>
-        </div>
+    <div id="interface">
 
-        <div id="target-status" class="status">
-            Aponte a câmera para o equipamento
-        </div>
+        <div id="status">
 
-    </header>
+            <div id="target-status">
+                Aponte para o equipamento
+            </div>
 
-
-    <!-- Área de informação -->
-    <section id="info-panel" class="hidden">
-
-        <div class="info-card">
-
-            <button
-                id="close-panel"
-                class="close-button"
-                type="button"
-                aria-label="Fechar informações"
-            >
-                ×
-            </button>
-
-            <h2 id="info-title">Informações</h2>
-
-            <div id="info-content">
-                Aponte a câmera para o Centro de Usinagem e selecione um ponto.
+            <div id="connection-status">
+                Aguardando câmera
             </div>
 
         </div>
 
-    </section>
+        <div id="info-panel">
 
+            <h2 id="info-title">
+                Informações
+            </h2>
 
-    <!-- Mensagem de conexão -->
-    <div id="connection-status" class="connection-status">
-        Preparando realidade aumentada...
+            <p id="info-text">
+                Selecione um ponto do equipamento.
+            </p>
+
+            <button id="close-info">
+                Fechar
+            </button>
+
+        </div>
+
     </div>
 
 
-    <!-- Cena WebAR -->
     <a-scene
-        mindar-image="
-            imageTargetSrc: assets/targets/centro-usinagem.mind;
-            autoStart: true;
-            uiLoading: yes;
-            uiScanning: yes;
-            uiError: yes;
-        "
-        embedded
+        id="ar-scene"
+        mindar-image="imageTargetSrc: assets/targets/centro-usinagem.mind; autoStart: true; uiLoading: no; uiScanning: no; uiError: no;"
         color-space="sRGB"
-        renderer="colorManagement: true; physicallyCorrectLights"
+        renderer="colorManagement: true, physicallyCorrectLights"
         vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false"
     >
 
-        <!-- Câmera -->
+        <a-assets>
+
+            <img
+                id="equipamento"
+                src="assets/images/centro-usinagem.jpg"
+            >
+
+        </a-assets>
+
+
         <a-camera
+            id="ar-camera"
             position="0 0 0"
             look-controls="enabled: false"
-        ></a-camera>
+            cursor="fuse: false; rayOrigin: mouse;"
+            raycaster="objects: .hotspot;"
+        >
+        </a-camera>
 
 
-        <!-- Target reconhecido -->
-        <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity id="target" mindar-image-target="targetIndex: 0">
 
-
-            <!-- ================================================= -->
-            <!-- HOTSPOT 1 - PAINEL DE CONTROLE -->
-            <!-- ================================================= -->
-
-            <a-entity
-                class="hotspot"
-                data-topic="painel"
-                position="-0.35 0.15 0"
-                geometry="
-                    primitive: circle;
-                    radius: 0.055;
-                "
-                material="
-                    color: #00e5ff;
-                    shader: flat;
-                    opacity: 0.95;
-                "
+            <a-image
+                src="#equipamento"
+                position="0 0 0"
+                width="1"
+                height="0.6"
+                opacity="0"
             >
-
-                <a-text
-                    value="1"
-                    align="center"
-                    color="#ffffff"
-                    width="1"
-                    position="0 0 0.01"
-                ></a-text>
-
-            </a-entity>
+            </a-image>
 
 
-            <!-- ================================================= -->
-            <!-- HOTSPOT 2 - ÁREA DE USINAGEM -->
-            <!-- ================================================= -->
-
-            <a-entity
+            <a-circle
                 class="hotspot"
-                data-topic="usinagem"
-                position="0.05 0.05 0"
-                geometry="
-                    primitive: circle;
-                    radius: 0.055;
-                "
-                material="
-                    color: #00e5ff;
-                    shader: flat;
-                    opacity: 0.95;
-                "
+                data-type="painel"
+                position="-0.35 0.18 0.02"
+                radius="0.05"
+                color="#00ff88"
             >
-
-                <a-text
-                    value="2"
-                    align="center"
-                    color="#ffffff"
-                    width="1"
-                    position="0 0 0.01"
-                ></a-text>
-
-            </a-entity>
+            </a-circle>
 
 
-            <!-- ================================================= -->
-            <!-- HOTSPOT 3 - MAGAZINE DE FERRAMENTAS -->
-            <!-- ================================================= -->
-
-            <a-entity
+            <a-circle
                 class="hotspot"
-                data-topic="magazine"
-                position="0.38 0.18 0"
-                geometry="
-                    primitive: circle;
-                    radius: 0.055;
-                "
-                material="
-                    color: #00e5ff;
-                    shader: flat;
-                    opacity: 0.95;
-                "
+                data-type="usinagem"
+                position="0.05 -0.05 0.02"
+                radius="0.05"
+                color="#00ff88"
             >
-
-                <a-text
-                    value="3"
-                    align="center"
-                    color="#ffffff"
-                    width="1"
-                    position="0 0 0.01"
-                ></a-text>
-
-            </a-entity>
+            </a-circle>
 
 
-            <!-- ================================================= -->
-            <!-- HOTSPOT 4 - TELEMETRIA -->
-            <!-- ================================================= -->
-
-            <a-entity
+            <a-circle
                 class="hotspot"
-                data-topic="telemetria"
-                position="0.30 -0.18 0"
-                geometry="
-                    primitive: circle;
-                    radius: 0.055;
-                "
-                material="
-                    color: #00ff88;
-                    shader: flat;
-                    opacity: 0.95;
-                "
+                data-type="magazine"
+                position="0.35 0.18 0.02"
+                radius="0.05"
+                color="#00ff88"
             >
+            </a-circle>
 
-                <a-text
-                    value="4"
-                    align="center"
-                    color="#ffffff"
-                    width="1"
-                    position="0 0 0.01"
-                ></a-text>
 
-            </a-entity>
-
+            <a-circle
+                class="hotspot"
+                data-type="telemetria"
+                position="0 -0.28 0.02"
+                radius="0.05"
+                color="#00ff88"
+            >
+            </a-circle>
 
         </a-entity>
 
     </a-scene>
 
 
-    <!-- Instrução inicial -->
-    <div id="instruction">
-
-        <span>
-            Aponte a câmera para o Centro de Usinagem
-        </span>
-
-    </div>
-
-
-    <!-- JavaScript do projeto -->
     <script src="js/app.js"></script>
 
 </body>
 
 </html>
-```
