@@ -1,4 +1,3 @@
-javascript
 document.addEventListener("DOMContentLoaded", function () {
 
     const target = document.querySelector("#target");
@@ -20,9 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const closeInfo =
         document.querySelector("#close-info");
-
-    const loading =
-        document.querySelector("#loading");
 
     const hotspots =
         document.querySelectorAll(".hotspot");
@@ -60,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     showInfo(
                         "Painel de Controle",
-                        "Área responsável pelo comando e monitoramento do centro de usinagem."
+                        "Area responsavel pelo comando e monitoramento do centro de usinagem."
                     );
 
                 }
@@ -69,8 +65,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (type === "usinagem") {
 
                     showInfo(
-                        "Área de Usinagem",
-                        "Região onde ocorre o processo de fabricação e remoção de material."
+                        "Area de Usinagem",
+                        "Regiao onde ocorre o processo de fabricacao e remocao de material."
                     );
 
                 }
@@ -80,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     showInfo(
                         "Magazine de Ferramentas",
-                        "Sistema responsável pelo armazenamento e troca automática das ferramentas."
+                        "Sistema responsavel pelo armazenamento e troca automatica das ferramentas."
                     );
 
                 }
@@ -90,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     showInfo(
                         "Telemetria",
-                        "Área destinada à apresentação dos dados do equipamento."
+                        "Area destinada a apresentacao dos dados do equipamento."
                     );
 
                 }
@@ -135,41 +131,11 @@ document.addEventListener("DOMContentLoaded", function () {
             connectionStatus.textContent =
                 "Target nao identificado";
 
-            connectionStatus.classList.remove(
-                "connected"
-            );
-
         }
     );
 
 
-    const scene =
-        document.querySelector("#ar-scene");
-
-
-    scene.addEventListener(
-        "arReady",
-        function () {
-
-            loading.style.display = "none";
-
-            connectionStatus.textContent =
-                "Camera pronta";
-
-        }
-    );
-
-
-    scene.addEventListener(
-        "arError",
-        function () {
-
-            loading.style.display = "none";
-
-            connectionStatus.textContent =
-                "Erro ao iniciar camera";
-
-        }
-    );
+    connectionStatus.textContent =
+        "Inicializando camera";
 
 });
