@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const target = document.querySelector("#target");
+    const target =
+        document.querySelector("#target");
 
     const targetStatus =
         document.querySelector("#target-status");
@@ -133,9 +134,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
     );
-
-
-    connectionStatus.textContent =
-        "Inicializando camera";
 
 });
