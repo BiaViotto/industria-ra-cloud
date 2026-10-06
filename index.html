@@ -2,153 +2,49 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0"
     >
 
-    <title>RA | Centro de Usinagem</title>
-
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+    <title>Teste RA</title>
 
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-
 </head>
 
 <body>
 
-    <div id="loading">
-        <div class="loading-spinner"></div>
-        <p>Carregando realidade aumentada...</p>
-    </div>
-
-    <div id="interface">
-
-        <div id="status">
-
-            <div id="target-status">
-                Aponte para o equipamento
-            </div>
-
-            <div id="connection-status">
-                Aguardando câmera
-            </div>
-
-        </div>
-
-        <div id="info-panel">
-
-            <h2 id="info-title">
-                Informações
-            </h2>
-
-            <p id="info-text">
-                Selecione um ponto do equipamento.
-            </p>
-
-            <button id="close-info">
-                Fechar
-            </button>
-
-        </div>
-
-    </div>
-
-
     <a-scene
-    id="ar-scene"
-    mindar-image="imageTargetSrc: assets/targets/centro-usinagem.mind; autoStart: true;"
-    color-space="sRGB"
-    renderer="colorManagement: true"
-    vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false"
+        mindar-image="imageTargetSrc: assets/targets/centro-usinagem.mind"
+        color-space="sRGB"
+        renderer="colorManagement: true"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
     >
 
-        <a-assets>
-
-            <img
-                id="equipamento"
-                src="assets/images/centro-usinagem.jpg"
-            >
-
-        </a-assets>
-
-
         <a-camera
-            id="ar-camera"
             position="0 0 0"
             look-controls="enabled: false"
-            cursor="fuse: false; rayOrigin: mouse;"
-            raycaster="objects: .hotspot;"
         >
         </a-camera>
 
+        <a-entity
+            mindar-image-target="targetIndex: 0"
+        >
 
-        <a-entity id="target" mindar-image-target="targetIndex: 0">
-
-            <a-image
-                src="#equipamento"
+            <a-box
                 position="0 0 0"
-                width="1"
-                height="0.6"
-                opacity="0"
+                color="red"
             >
-            </a-image>
-
-
-            <a-circle
-                class="hotspot"
-                data-type="painel"
-                position="-0.35 0.18 0.02"
-                radius="0.05"
-                color="#00ff88"
-            >
-            </a-circle>
-
-
-            <a-circle
-                class="hotspot"
-                data-type="usinagem"
-                position="0.05 -0.05 0.02"
-                radius="0.05"
-                color="#00ff88"
-            >
-            </a-circle>
-
-
-            <a-circle
-                class="hotspot"
-                data-type="magazine"
-                position="0.35 0.18 0.02"
-                radius="0.05"
-                color="#00ff88"
-            >
-            </a-circle>
-
-
-            <a-circle
-                class="hotspot"
-                data-type="telemetria"
-                position="0 -0.28 0.02"
-                radius="0.05"
-                color="#00ff88"
-            >
-            </a-circle>
+            </a-box>
 
         </a-entity>
 
     </a-scene>
-
-
-    <script src="js/app.js"></script>
 
 </body>
 
